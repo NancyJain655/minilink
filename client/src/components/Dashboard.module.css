@@ -1,0 +1,99 @@
+.dashboard {
+    display: flex;
+  }
+  
+  .navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .greeting {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .navActions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .createBtn {
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .searchBar {
+    padding: 0.5rem;
+    margin-right: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .userIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .sidebar {
+    width: 15rem;
+    background-color: #f1f1f1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .navButton {
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+  }
+  
+  .navButton.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .main {
+    flex: 1;
+    padding: 1rem;
+  }
+  
+  .cards {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .card {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
