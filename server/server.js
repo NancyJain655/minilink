@@ -13,7 +13,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin : 'https://minilink-two.vercel.app/',
+  origin : 'https://minilink-two.vercel.app',
   credentials: true,
 }));
 app.use(express.json());
