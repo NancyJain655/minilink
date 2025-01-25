@@ -12,20 +12,7 @@ const app = express();
 connectDB();
 
 // Middleware
-const allowedOrigins = [
-  'https://minilink-one.vercel.app',
-];
-
-app.use(cors({
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true); // Allow the request
-    } else {
-      callback(new Error('Not allowed by CORS')); // Block the request
-    }
-  },
-  credentials: true, // Allow cookies and other credentials
-}));
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
