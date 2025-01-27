@@ -101,9 +101,8 @@ const Login = () => {
 export default Login;*/
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import Toastify styles
-import { loginUser } from "../apis/auth";
+import { toast } from "react-toastify"; // Import the toast object
+import { loginUser } from "../../apis/auth";
 import styles from "./Login.module.css"; // Import the CSS Module
 
 const Login = () => {
@@ -208,7 +207,6 @@ const Login = () => {
           </p>
         </div>
       </div>
-      <ToastContainer /> {/* Add ToastContainer to display toasts */}
     </div>
   );
 };

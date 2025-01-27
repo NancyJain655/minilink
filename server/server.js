@@ -12,10 +12,7 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors({
-  origin : 'https://minilink-two.vercel.app',
-  credentials: true,
-}));
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 

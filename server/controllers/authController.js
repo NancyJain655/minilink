@@ -62,6 +62,12 @@ const loginUser = async (req, res) => {
     res.status(201).json({
       msg: 'logged in successfully',
       token,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        mobileNumber:user.mobileNumber, // Include the fields you want to store
+      },
     });
   } catch (err) {
     console.error(err.message);
@@ -76,17 +82,19 @@ const updateUser = async (req, res) => {
     const user = await User.findById(req.user.id);  // Get user from decoded JWT
     if (!user) return res.status(404).json({ msg: 'User not found' });
 
-    if (mobileNumber) {
-      return res.status(400).json({ msg: 'Mobile number cannot be updated' });
-    }
-
     let emailChanged = false;
+    let mobileChanged = false;
 
     if (name) user.name = name;
-    if (email) {
+    if (email && email !== user.email) {
       user.email = email;
-      emailChanged = true;  // Mark that email has been changed
+      emailChanged = true; // Mark that email has been changed
     }
+    if (mobileNumber && mobileNumber !== user.mobileNumber) {
+      user.mobileNumber = mobileNumber;
+      mobileChanged = true; // Mark mobile number as changed
+    }
+
 
     await user.save();
 
@@ -97,7 +105,10 @@ const updateUser = async (req, res) => {
       });
     }
 
-    res.json({ msg: 'User updated successfully', user });
+    const msg = mobileChanged
+    ? "User updated successfully. Mobile number updated."
+    : "User updated successfully.";
+  return res.json({ msg, user });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

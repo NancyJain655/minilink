@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
@@ -7,7 +7,7 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboard}>
-      {/* Navbar */}
+      {/* Navbar }
       <nav className={styles.navbar}>
         <div className={styles.greeting}>
           🌞 Good morning, {user.name}
@@ -26,7 +26,7 @@ const Dashboard = () => {
         </div>
       </nav>
 
-      {/* Sidebar */}
+      {/* Sidebar }
       <aside className={styles.sidebar}>
         <div className={styles.logo}>cuvette</div>
         <button className={`${styles.navButton} ${styles.active}`}>Dashboard</button>
@@ -35,7 +35,7 @@ const Dashboard = () => {
         <button className={styles.navButton}>Settings</button>
       </aside>
 
-      {/* Main Content */}
+      {/* Main Content }
       <main className={styles.main}>
         <h2>Total Clicks: {totalClicks}</h2>
         <div className={styles.cards}>
@@ -53,4 +53,48 @@ const Dashboard = () => {
   );
 };
 
+export default Dashboard;*/
+/*import React from 'react'
+import Sidebar from '../../components/Sidebar/Sidebar'
+import Header from '../../components/Header/Header'
+import styles from './Dashboard.module.css'
+const Dashboard = () => {
+  return (
+    
+    <main className={styles.dashboard}>
+      <Sidebar />
+      <div className={styles.main}>
+        <Header />
+        <div className={styles.pages}>
+          asdsa
+        </div>
+      </div>
+    </main>
+  )
+}
+
+export default Dashboard*/
+import React from "react";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Header from "../../components/Header/Header";
+import styles from "./Dashboard.module.css";
+
+const Dashboard = () => {
+  return (
+    <div className={styles.dashboard}>
+      {/* Sidebar */}
+      <Sidebar />
+      {/* Main Content */}
+      <div className={styles.main}>
+        <Header />
+        <div className={styles.pages}>
+          <h2>Welcome to the Dashboard</h2>
+          <p>Here's where you can manage your data dynamically.</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default Dashboard;
+

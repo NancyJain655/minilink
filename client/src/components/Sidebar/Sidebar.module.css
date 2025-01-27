@@ -1,0 +1,65 @@
+
+  .sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #E5E5E5;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.middle {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.settings {
+    margin-top: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+a {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align the items to the left */
+    gap: 10px;
+    padding: 9px 13px; /* Consistent padding for all links */
+    width: 100%; /* Ensure links take the full width */
+    height: 50px; /* Fixed height for all links */
+    box-sizing: border-box; /* Ensure padding doesn't affect overall dimensions */
+}
+
+a img {
+    width: 20px; /* Adjust the image size */
+    height: 20px; /* Adjust the image size */
+}
+
+a.active {
+    font-weight: bold;
+    color: #007bff;
+    background-color: #F3F7FD;
+}
+a.active {
+    font-weight: bold;
+    color: #007bff;
+    background-color: #e9f5ff; /* Light background color to highlight active link */
+    border-radius: 5px; /* Optional: adds rounded corners */
+}
+
+  

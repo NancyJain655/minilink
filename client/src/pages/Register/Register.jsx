@@ -127,7 +127,7 @@ const Register = () => {
 export default Register;*/
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { registerUser } from '../apis/auth';
+import { registerUser } from '../../apis/auth';
 import { toast } from "react-toastify"; // Import the toast object
 import styles from "./Register.module.css"; // Import the CSS Module
 

@@ -1,0 +1,80 @@
+
+  .settings-page {
+    display: flex;
+    height: 100vh; /* Ensure full height layout */
+    background-color: white;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #f7f8fa;
+    flex-shrink: 0; /* Prevent Sidebar from shrinking */
+  }
+  
+  .main-content {
+    flex: 1; /* Take up remaining space */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    /*padding-left: 20px; /* Shift form section slightly to the left */
+
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .form-section {
+    margin-top: 80px;
+    margin-left: -200px;
+  }
+  
+  .form-section form {
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  label {
+    display: flex; /* Make label and input inline */
+    justify-content: space-between; /* Space between label and input */
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  
+  label span {
+    margin-right: 10px; /* Adjust space between label text and input field */
+    text-align: center;
+  }
+  
+  input {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 60px;
+  }
+  
+  .save-button {
+    width:100%;
+    background-color: blue;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+  .delete-button {
+    background-color: red;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  

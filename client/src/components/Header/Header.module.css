@@ -1,0 +1,151 @@
+/*.header {
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 1px solid #E5E5E5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+.greeting {
+    font-size: 1rem;
+}
+.greeting p{
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #878BA9;
+    margin-left: 25px;
+}
+
+.headerFunc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+.headerFunc button {
+    background-color: var(--primary-color);
+    width:130px;
+    height: 30px;
+    padding: 0.5px 1px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    background-color: #334b9c
+}
+
+.headerFunc input{
+    padding: 2px 2px;
+    height: 30px;
+    width:200px;
+    border-radius: 5px;
+    border: 1px solid #E5E5E5;
+}
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}*/
+.header {
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 1px solid #E5E5E5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.greeting {
+    font-size: 1rem;
+}
+
+.greeting p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: #878BA9;
+    margin-left: 25px;
+}
+
+.headerFunc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.headerFunc button {
+    width: 130px;
+    height: 30px;
+    padding: 0.5px 1px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    background-color: #1B48DA;
+}
+
+.search-wrapper {
+    position: relative;
+}
+
+.headerFunc input {
+    padding-left: 30px; /* Adds space for the icon inside the input */
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid #E5E5E5;
+}
+
+.search-wrapper img {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Centers the icon vertically */
+    width: 12px;  /* Adjust icon size */
+    height: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color:#FDE48A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #923E0E;
+}
+.logoutModal {
+    position: absolute;
+    top: 10%;
+    right: 0;
+    width: 85px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    margin-right: 20px;
+    border-radius: 4px;
+  }
+  
+  .logoutModal button {
+    all: unset;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+  }
+  
+
+
