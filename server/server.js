@@ -20,6 +20,13 @@ app.use(cors({
 app.use(device.capture());
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({extended: true}));
+
+app.get('/', (req, res) => {
+    res.json({
+        message: 'Hello World'
+    });
+});
 
 // Routes
 app.use('/api/auth', authRoutes);

@@ -97,3 +97,20 @@ export const searchLinks = async (searchQuery, page = 1, limit = 8) => {
     throw error;
   }
 };
+
+
+export const getUserLinksWithAnalytics = async (token, page = 1, limit = 8) => {
+  try {
+    const response = await axios.get(`${baseUrl}/api/link/geturl`, {
+      params: { page, limit },
+      headers: {
+        Authorization: `Bearer ${token}`,  // Ensure user authentication
+      },
+    });
+
+    return response.data.data; // Returning URLs and analytics data, including pagination
+  } catch (error) {
+    console.error("Error fetching links:", error);
+    return null;
+  }
+};

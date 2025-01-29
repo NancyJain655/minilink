@@ -94,7 +94,7 @@ const redirectLink = async (req, res) => {
     // Collecting click data
     const clickData = {
       timestamp: new Date(),
-      ipAddress: req.ip,  // You may want to use a library to detect the real IP address
+      ipAddress: req.headers["x-forwarded-for"]? req.headers["x-forwarded-for"].split(",")[0].trim(): req.ip, // You may want to use a library to detect the real IP address
       device: req.device.type,  // This might need more parsing to get exact device info
       os: req.headers['user-agent'],  // You may want to parse this into the OS
       browser: req.headers['user-agent'],  // Parse browser name
