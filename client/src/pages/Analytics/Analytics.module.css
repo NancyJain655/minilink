@@ -8,10 +8,50 @@
     flex: 1;
   }
   
-  .pages {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+
+
+
+
+.table {
+  width: calc(100% - 40px); /* Reducing width to account for margin */
+  margin: 20px; /* Margin on all sides */
   
+  border-collapse: collapse;
+  overflow: hidden; /* Ensures the border-radius works */
+  border-radius: 12px; /* Rounded corners for the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd; /* Border for inner rows and columns */
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #F3F7FD;
+  font-weight: bold;
+}
+
+/*.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}*/
+
+.table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+.sortIcon{
+  margin-left: 20px;
+  height:10px;
+  width:8px;
+}

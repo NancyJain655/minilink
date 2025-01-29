@@ -1,60 +1,149 @@
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-  }
-  
-  .container {
-    display: flex;
-    height: 100vh;
-  }
-  .top-buttons {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    gap: 10px;
-  }
-  
-  .top-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .top-button:hover {
-    background-color: #0056b3;
-  }
-  /* New styles for inactive buttons */
-  .inactive-button {
-    background-color: transparent;
-    color: #007bff;
-    border: 2px solid #007bff;
-  }
-  
-  .inactive-button:hover {
-    background-color: transparent;
-    color: #0056b3;
-    border: 2px solid #0056b3;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Top Buttons */
+.top-buttons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.top-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.top-button:hover {
+  background-color: #0056b3;
+}
+
+.inactive-button {
+  background-color: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.inactive-button:hover {
+  background-color: transparent;
+  color: #0056b3;
+  border: 2px solid #0056b3;
+}
+
+/* Left Section */
+.left-section {
+  flex: 0.7;
+  background-image: url("/background.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+/* Right Section */
+.right-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  text-align: left;
+}
+
+.form-container h2 {
+  font-size: 1.25rem;
+  margin-bottom: 3rem;
+  color: #333;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-container input {
+  padding: 0.8rem;
+  width: 100%;
+  border: 1px solid #3B3C51;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-container input:focus {
+  border-color: #007bff;
+}
+
+.form-container button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #0056b3;
+}
+
+.form-container p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #3B3C51;
+  text-align: center;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Tablets and small laptops */
+@media (max-width: 768px) {
   .left-section {
-    flex: 0.7;
-    background-image: url("/background.jpg"); /* Update with your image */
-    background-size: cover;
-    background-position: center;
-    
-    position: relative;
+    flex: 1;
+    width:150px;
+    background-color: #f5f5f5; /* Optional: Replace with a fallback color */
   }
+
   .logo {
     position: absolute;
     top: 20px;
@@ -64,57 +153,66 @@
     font-weight: bold;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
   }
+
+  .right-section {
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .form-container {
+    width: 90%;
+    max-width: 350px;
+    margin-top: 30px;
+  }
+
+  .form-container h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+  .left-section {
+    display: none; /* Hide the left section completely */
+   
+  }
+
   .right-section {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-shadow: none;
+    padding: 20px; /* Add padding for smaller screens */
   }
+
   .form-container {
     width: 100%;
-    max-width: 400px;
-    text-align: left;
+    padding: 20px;
+    text-align: center; /* Center align text */
   }
+
   .form-container h2 {
-    font-size: 1.25rem;
-    margin-bottom: 3rem;
-    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
   }
-  .form-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+
   .form-container input {
-    padding: 0.8rem;
-    width:100%;
-    border: 1px solid #3B3C51;
-    border-radius: 5px;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s ease;
-  }
-  .form-container input:focus {
-    border-color: #007bff;
-  }
-  .form-container button {
-    background-color: #007bff;
-    color: white;
-    padding: 0.8rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .form-container button:hover {
-    background-color: #0056b3;
-  }
-  .form-container p {
-    margin-top: 1rem;
+    padding: 0.6rem;
     font-size: 0.9rem;
-    color: #3B3C51;
-    text-align: center;
   }
+
+  .form-container button {
+    padding: 0.7rem;
+    font-size: 1rem;
+  }
+
+  .top-buttons {
+    gap: 5px;
+    right: 10px;
+    top: 10px;
+  }
+
+  .top-button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}

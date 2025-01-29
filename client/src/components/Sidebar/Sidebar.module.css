@@ -37,17 +37,17 @@ a {
     color: #000;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Align the items to the left */
+    justify-content: flex-start; 
     gap: 10px;
-    padding: 9px 13px; /* Consistent padding for all links */
-    width: 100%; /* Ensure links take the full width */
-    height: 50px; /* Fixed height for all links */
-    box-sizing: border-box; /* Ensure padding doesn't affect overall dimensions */
+    padding: 9px 13px; 
+    width: 100%;
+    height: 50px; 
+    box-sizing: border-box; 
 }
 
 a img {
-    width: 20px; /* Adjust the image size */
-    height: 20px; /* Adjust the image size */
+    width: 20px; 
+    height: 20px; 
 }
 
 a.active {
@@ -58,8 +58,6 @@ a.active {
 a.active {
     font-weight: bold;
     color: #007bff;
-    background-color: #e9f5ff; /* Light background color to highlight active link */
-    border-radius: 5px; /* Optional: adds rounded corners */
+    background-color: #e9f5ff; 
+    border-radius: 5px; 
 }
-
-  

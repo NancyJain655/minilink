@@ -1,95 +1,225 @@
-/*import React, { useState } from 'react';
-import styles from './Dashboard.module.css';
+
+/*import React from "react";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Header from "../../components/Header/Header";
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelList } from "recharts";
+import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
-  const [user] = useState({ name: 'Sujith' }); // Replace with actual user data
-  const [totalClicks, setTotalClicks] = useState(0);
+  const dateWiseData = [
+    { date: "21-01-25", clicks: 1234 },
+    { date: "20-01-25", clicks: 1140 },
+    { date: "19-01-25", clicks: 134 },
+    { date: "18-01-25", clicks: 34 },
+  ];
+
+  const deviceWiseData = [
+    { device: "Mobile", clicks: 134 },
+    { device: "Desktop", clicks: 40 },
+    { device: "Tablet", clicks: 3 },
+  ];
 
   return (
     <div className={styles.dashboard}>
-      {/* Navbar }
-      <nav className={styles.navbar}>
-        <div className={styles.greeting}>
-          🌞 Good morning, {user.name}
-          <span>{new Date().toLocaleDateString()}</span>
-        </div>
-        <div className={styles.navActions}>
-          <button className={styles.createBtn}>+ Create new</button>
-          <input
-            type="text"
-            placeholder="Search by remarks"
-            className={styles.searchBar}
-          />
-          <div className={styles.userIcon}>
-            {user.name.slice(0, 2).toUpperCase()}
-          </div>
-        </div>
-      </nav>
+      
+      <Sidebar />
+      
+      <div className={styles.main}>
+        <Header />
+        <div className={styles.pages}>
+          <div className={styles.pageContent}>
+            <div className={styles.totalClicksWrapper}>
+              <h2>Total Clicks</h2>
+              <span className={styles.totalClicks}>1234</span>
+            </div>
+            <div className={styles.charts}>
+              
+              <div className={styles.chart}>
+                <h3>Date-wise Clicks</h3>
+                <ResponsiveContainer width="100%" height={160}>
+                  <BarChart
+                    data={dateWiseData}
+                    layout="vertical"
+                    margin={{ top: 10, right: 30, left: 20, bottom: 10 }}
+                  >
+                    <XAxis type="number" hide /> 
+                    <YAxis
+                      dataKey="date"
+                      type="category"
+                      axisLine={false}
+                      tickLine={false}
+                      width={80}
+                      tick={{ fill: "#000", fontSize: 16 }}
+                    />
+                    <Bar dataKey="clicks" fill="#1B48DA" barSize={15}>
+                      <LabelList
+                        dataKey="clicks"
+                        position="right"
+                        content={({ x, y, value }) => (
+                          <text
+                           // x="right"// Fixed X-position for alignment
+                            y={y + 5}
+                            fill="#000"
+                            fontSize="16px"
+                            textAnchor="end"
+                          >
+                            {value}
+                          </text>
+                        )}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
 
-      {/* Sidebar }
-      <aside className={styles.sidebar}>
-        <div className={styles.logo}>cuvette</div>
-        <button className={`${styles.navButton} ${styles.active}`}>Dashboard</button>
-        <button className={styles.navButton}>Links</button>
-        <button className={styles.navButton}>Analytics</button>
-        <button className={styles.navButton}>Settings</button>
-      </aside>
-
-      {/* Main Content }
-      <main className={styles.main}>
-        <h2>Total Clicks: {totalClicks}</h2>
-        <div className={styles.cards}>
-          <div className={styles.card}>
-            <h3>Date-wise Clicks</h3>
-            <p>All clicks will be displayed here...</p>
-          </div>
-          <div className={styles.card}>
-            <h3>Device-wise Clicks</h3>
-            <p>All device stats will be displayed here...</p>
+             
+              <div className={styles.chart}>
+                <h3>Click Devices</h3>
+                <ResponsiveContainer width="100%" height={120}>
+                  <BarChart
+                    data={deviceWiseData}
+                    layout="vertical"
+                    margin={{ top: 10, right: 30, left: 20, bottom: 10 }}
+                  >
+                    <XAxis type="number" hide /> 
+                    <YAxis
+                      dataKey="device"
+                      type="category"
+                      axisLine={false}
+                      tickLine={false}
+                      width={80}
+                      tick={{ fill: "#000", fontSize: 16 }}
+                    />
+                    <Bar dataKey="clicks" fill="#1B48DA" barSize={15}>
+                      <LabelList
+                        dataKey="clicks"
+                        position="right"
+                        content={({ x, y, value }) => (
+                          <text
+                            x={450} // Fixed X-position for alignment
+                            y={y + 5}
+                            fill="#000"
+                            fontSize="16px"
+                            textAnchor="end"
+                          >
+                            {value}
+                          </text>
+                        )}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };
 
 export default Dashboard;*/
-/*import React from 'react'
-import Sidebar from '../../components/Sidebar/Sidebar'
-import Header from '../../components/Header/Header'
-import styles from './Dashboard.module.css'
-const Dashboard = () => {
-  return (
-    
-    <main className={styles.dashboard}>
-      <Sidebar />
-      <div className={styles.main}>
-        <Header />
-        <div className={styles.pages}>
-          asdsa
-        </div>
-      </div>
-    </main>
-  )
-}
-
-export default Dashboard*/
 import React from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+  LabelList,
+} from "recharts";
 import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
+  const dateWiseData = [
+    { date: "21-01-25", clicks: 1234 },
+    { date: "20-01-25", clicks: 1140 },
+    { date: "19-01-25", clicks: 134 },
+    { date: "18-01-25", clicks: 34 },
+  ];
+
+  const deviceWiseData = [
+    { device: "Mobile", clicks: 134 },
+    { device: "Desktop", clicks: 40 },
+    { device: "Tablet", clicks: 3 },
+  ];
+
   return (
     <div className={styles.dashboard}>
-      {/* Sidebar */}
       <Sidebar />
-      {/* Main Content */}
+
       <div className={styles.main}>
         <Header />
         <div className={styles.pages}>
-          <h2>Welcome to the Dashboard</h2>
-          <p>Here's where you can manage your data dynamically.</p>
+          <div className={styles.pageContent}>
+            <div className={styles.totalClicksWrapper}>
+              <h2>Total Clicks</h2>
+              <span className={styles.totalClicks}>1234</span>
+            </div>
+            <div className={styles.charts}>
+              {/* Date-wise Clicks Chart */}
+              <div className={styles.chart}>
+                <h3>Date-wise Clicks</h3>
+                <ResponsiveContainer width="100%" height={160}>
+                  <BarChart
+                    data={dateWiseData}
+                    layout="vertical"
+                    margin={{ top: 10, right: 30, left: 20, bottom: 10 }}
+                  >
+                    <XAxis type="number" hide />
+                    <YAxis
+                      dataKey="date"
+                      type="category"
+                      axisLine={false}
+                      tickLine={false}
+                      width={80}
+                      tick={{ fill: "#000", fontSize: 16 }}
+                    />
+                    <Bar dataKey="clicks" fill="#1B48DA" barSize={15}>
+                      {/* Use LabelList without fixed x position */}
+                      <LabelList
+                        dataKey="clicks"
+                        position="right" // Places the labels on the right of the bars
+                        style={{ fill: "#000", fontSize: "16px" }}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Click Devices Chart */}
+              <div className={styles.chart}>
+                <h3>Click Devices</h3>
+                <ResponsiveContainer width="100%" height={120}>
+                  <BarChart
+                    data={deviceWiseData}
+                    layout="vertical"
+                    margin={{ top: 10, right: 30, left: 20, bottom: 10 }}
+                  >
+                    <XAxis type="number" hide />
+                    <YAxis
+                      dataKey="device"
+                      type="category"
+                      axisLine={false}
+                      tickLine={false}
+                      width={80}
+                      tick={{ fill: "#000", fontSize: 16 }}
+                    />
+                    <Bar dataKey="clicks" fill="#1B48DA" barSize={15}>
+                      {/* Use LabelList without fixed x position */}
+                      <LabelList
+                        dataKey="clicks"
+                        position="right" // Places the labels on the right of the bars
+                        style={{ fill: "#000", fontSize: "16px" }}
+                      />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -97,4 +227,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
 

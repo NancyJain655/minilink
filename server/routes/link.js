@@ -1,6 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middleware/auth');
-const { createShortenedLink, getUserLinks, redirectLink ,editUrl,deleteUrl} = require('../controllers/linkController');
+const { createShortenedLink, getUserLinks, redirectLink ,editUrl,deleteUrl,searchUrl} = require('../controllers/linkController');
 const router = express.Router();
 
 
@@ -10,5 +10,6 @@ router.get('/:shortened_url', redirectLink);
 router.put("/edit/:id", authMiddleware, editUrl);
 
 router.delete("/delete/:id", authMiddleware, deleteUrl);
+router.get("/search",authMiddleware,searchUrl);
 
 module.exports = router;
