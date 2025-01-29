@@ -100,7 +100,7 @@ const redirectLink = async (req, res) => {
     const os = parser.getOS().name || "Unknown OS"; 
     const browser = parser.getBrowser().name || "Unknown Browser"; 
     const browserVersion = parser.getBrowser().version || "Unknown Version";
-    const device = parser.getDevice().model || "Unknown Device";
+    const device = req.device.type || "Unknown Device";
 
     // Collecting click data
     const clickData = {
