@@ -3,6 +3,7 @@ const shortid = require('shortid');
 const ShortUrlModel = require('../models/shortUrl');
 const mongoose = require('mongoose');
 const { request } = require('express');
+const UAParser = require("ua-parser-js");
 
 
 const createShortenedLink = async (req, res) => {
@@ -78,6 +79,8 @@ const getUserLinks = async (req, res) => {
 
 
 
+
+
 const redirectLink = async (req, res) => {
   const shortened_url = req.params.shortened_url;
 
@@ -90,27 +93,38 @@ const redirectLink = async (req, res) => {
       await link.remove();
       return res.status(404).json({ msg: "Link has expired" });
     }
-     
+
+    // Parse User-Agent to get OS, browser, and device
+    const userAgent = req.headers["user-agent"];
+    const parser = new UAParser(userAgent);
+    const os = parser.getOS().name || "Unknown OS"; 
+    const browser = parser.getBrowser().name || "Unknown Browser"; 
+    const browserVersion = parser.getBrowser().version || "Unknown Version";
+    const device = parser.getDevice().model || "Unknown Device";
+
     // Collecting click data
     const clickData = {
       timestamp: new Date(),
-      ipAddress: req.headers["x-forwarded-for"]? req.headers["x-forwarded-for"].split(",")[0].trim(): req.ip, // You may want to use a library to detect the real IP address
-      device: req.device.type,  // This might need more parsing to get exact device info
-      os: req.headers['user-agent'],  // You may want to parse this into the OS
-      browser: req.headers['user-agent'],  // Parse browser name
-      browserVersion: req.headers['user-agent'],  // Parse browser version
+      ipAddress: req.headers["x-forwarded-for"]
+        ? req.headers["x-forwarded-for"].split(",")[0].trim()
+        : req.ip,
+      device,
+      os,
+      browser,
+      browserVersion,
     };
-    console.log("nancy");
-    console.log(clickData);
+
+    console.log("Click Data:", clickData);
     link.clicks.push(clickData);
     await link.save();
 
     res.redirect(link.original_url);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ msg: "Server error" });
   }
 };
+
 const editUrl = async (req, res) => {
   const { id } = req.params; // ID of the link to be updated
   console.log(id);
