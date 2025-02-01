@@ -21,7 +21,7 @@ export const createShortenedLink = async (data) => {
 };
 
 
-export const getUrls = async (page = 1, limit = 8) => {
+export const getUrls = async (page = 1, limit = 7) => {
   try {
     const token = localStorage.getItem("token"); // Assuming you're storing the token in localStorage
     const response = await axios.get(`${baseUrl}/api/link/geturl`, {
@@ -86,20 +86,32 @@ export const deleteUrlById = async (id) => {
   }
 };
 
-export const searchLinks = async (searchQuery, page = 1, limit = 8) => {
+export const searchUrl = async (search) => {
+  
   try {
-    const response = await axios.get(`/url`, {
-      params: { search: searchQuery, page, limit },
-    });
-    return response.data.data.urls; // Assuming the API returns data in this format
+    const token = localStorage.getItem("token");
+      const response = await axios.get(`${baseUrl}/api/link/search/${search}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include token in the request
+      },
+      });
+      if(response.data.status == "success"){
+        console.log(response.data);
+          return response.data;
+         
+      } else {
+          toast.error(response.data.message);
+          return [];
+      }
   } catch (error) {
-    console.error('Error fetching links:', error);
-    throw error;
+      toast.error(error?.response?.data?.message);
+      console.log(error);
+      return [];
   }
-};
+}
 
 
-export const getUserLinksWithAnalytics = async (token, page = 1, limit = 8) => {
+export const getUserLinksWithAnalytics = async (token, page = 1, limit = 7) => {
   try {
     const response = await axios.get(`${baseUrl}/api/link/geturl`, {
       params: { page, limit },
@@ -112,5 +124,20 @@ export const getUserLinksWithAnalytics = async (token, page = 1, limit = 8) => {
   } catch (error) {
     console.error("Error fetching links:", error);
     return null;
+  }
+};
+
+export const getDashboardAnalytics = async (token) => {
+  try {
+    const response = await axios.get(`${baseUrl}/api/link/dashboard`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Sending user token for authentication
+      },
+    });
+
+    return response.data; // Return the analytics data
+  } catch (error) {
+    console.error("Error fetching dashboard analytics:", error);
+    throw error; // Handle error gracefully
   }
 };

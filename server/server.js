@@ -14,7 +14,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:5173",// Replace with your frontend origin
+  origin: "https://minilink-two.vercel.app",// Replace with your frontend origin
   credentials: true, // Allow cookies and credentials
 }));
 app.use(device.capture());
@@ -22,15 +22,12 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Hello World'
-    });
-});
-
 // Routes
+
 app.use('/api/auth', authRoutes);
+
 app.use('/api/link', linkRoutes);
+
 
 // Start server
 const PORT = process.env.PORT || 5000;

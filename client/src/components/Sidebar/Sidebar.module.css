@@ -61,3 +61,66 @@ a.active {
     background-color: #e9f5ff; 
     border-radius: 5px; 
 }
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #E5E5E5;
+  }
+  
+  /* Mobile Sidebar at Bottom */
+  @media (max-width: 800px) {
+    .sidebar {
+      width: 100%;
+      height: 60px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #E5E5E5;
+      z-index: 100;
+    }
+  
+     
+  
+    .sidebar ul {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-around;
+    }
+  
+    .sidebar ul li {
+      margin-bottom: 0;
+    }
+  
+    .sidebar ul li a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+    }
+    .sidebar ul li a span {
+        display: none;
+    }
+
+    .sidebar ul li a img {
+        width: 25px;  /* Adjust icon size if needed */
+        height: 25px;
+    }
+    .settings img {
+        margin-top: -7px;
+    }
+    .logo img {
+        content: url('/tube.png');
+        background-color: blue; 
+        margin-top: 12px;/* Use a different image */
+        width:25px;
+        font-weight: bold;
+    }
+  }

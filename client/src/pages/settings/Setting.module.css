@@ -1,21 +1,19 @@
 
-  .settings-page {
+  /*.settings-page {
     display: flex;
-    height: 100vh; /* Ensure full height layout */
+    height: 100vh;
     background-color: white;
   }
   
   .sidebar {
     width: 200px;
     background-color: #f7f8fa;
-    flex-shrink: 0; /* Prevent Sidebar from shrinking */
+    flex-shrink: 0; 
   }
   
   .main-content {
-    flex: 1; /* Take up remaining space */
-    overflow-y: auto; /* Allow scrolling if content overflows */
-    /*padding-left: 20px; /* Shift form section slightly to the left */
-
+    flex: 1; 
+    overflow-y: auto; 
   }
   
   .header {
@@ -33,14 +31,14 @@
   }
   
   label {
-    display: flex; /* Make label and input inline */
-    justify-content: space-between; /* Space between label and input */
+    display: flex; 
+    justify-content: space-between;
     margin-bottom: 10px;
     align-items: center;
   }
   
   label span {
-    margin-right: 10px; /* Adjust space between label text and input field */
+    margin-right: 10px;
     text-align: center;
   }
   
@@ -75,6 +73,151 @@
     border: none;
     cursor: pointer;
     border-radius: 4px;
+  }*/
+  .settings-page {
+    display: flex;
+    min-height: 100vh; /* Ensure full height layout */
+    background-color: white;
   }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 200px;
+    background-color: #f7f8fa;
+    flex-shrink: 0; /* Prevent Sidebar from shrinking */
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex: 1; /* Take up remaining space */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    padding: 20px;
+  }
+  
+  /* Header */
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  /* Form Section */
+  .form-section {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-section form {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+   /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);*/
+  }
+  
+  /* Labels and Inputs */
+  label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  label span {
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  /* Button Group */
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .save-button {
+    background-color: blue;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .delete-button {
+    background-color: red;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  /* ✅ Responsive Design */
+  @media screen and (max-width: 768px) {
+    .settings-page {
+      flex-direction: column; /* Stack elements vertically */
+      align-items: center;
+    }
+  
+    .sidebar {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    .main-content {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .form-section {
+      margin-top: 20px;
+    }
+  
+    .form-section form {
+      width: 90%;
+    }
+  
+    .save-button, .delete-button {
+      width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    label {
+      font-size: 14px;
+    }
+  
+    input {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .save-button, .delete-button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  
   
   

@@ -45,7 +45,7 @@ const createShortenedLink = async (req, res) => {
 };
 
 const getUserLinks = async (req, res) => {
-  const { page = 1, limit = 8 } = req.query;
+  const { page = 1, limit = 7 } = req.query;
   try { 
     if (!mongoose.Types.ObjectId.isValid(req.user.id)) {
       return res.status(400).json({ error: "Invalid user ID" });
@@ -75,7 +75,7 @@ const getUserLinks = async (req, res) => {
           error: "An error occurred while fetching the links. Please try again later.",
       });
   }
-}
+};
 
 
 
@@ -174,7 +174,7 @@ const editUrl = async (req, res) => {
           msg: "An error occurred while updating the link. Please try again later.",
       });
   }
-}
+};
 
 const deleteUrl = async (req, res) => {
   const { id } = req.params;
@@ -210,47 +210,137 @@ const deleteUrl = async (req, res) => {
           msg: "An error occurred while deleting the link. Please try again later.",
       });
   }
-}
-const searchUrl= async (req, res) => {
-  const { page = 1, limit = 8, search = "" } = req.query; // Capture the search query from the request
+};
+
+
+
+const dashboard = async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.user.id)) {
       return res.status(400).json({ error: "Invalid user ID" });
     }
+    const userId =  new mongoose.Types.ObjectId(req.user.id);
+      
+      const urls = await ShortUrlModel.find({user_id: userId });
 
-    const userId = new mongoose.Types.ObjectId(req.user.id);
+      let totalClicks = 0;
+      const dateWiseClicks = {};
+      const deviceTypeClicks = {
+          desktop: 0,
+          mobile: 0,
+          tablet: 0,
+      };
 
-    // Define the search query, focusing only on the 'remarks' field
-    const searchQuery = search
-      ? { remarks: { $regex: search, $options: 'i' } }  // Case-insensitive match for 'remarks'
-      : {}; // If no search term, return all
+      if (!urls.length) {
+          return res.status(202).json({ 
+              status: 'error',
+              message: "No URLs found for the user.",
+              totalClicks,
+              dateWiseClicks,
+              deviceTypeClicks,
+          });
+      }
 
-    const urls = await ShortUrlModel.find({ user_id: userId, ...searchQuery })
-      .sort({ createdAt: -1 })
-      .skip((page - 1) * limit)
-      .limit(parseInt(limit));
+      
+      urls.forEach((url) => {
+          totalClicks += url.clicks.length;
 
-    const totalLinks = await ShortUrlModel.countDocuments({ user_id: userId, ...searchQuery });
+          url.clicks.forEach((entry) => {
+              const date = entry.timestamp.toISOString().split("T")[0]; 
 
-    return res.status(200).json({
-      message: "Links fetched successfully.",
-      data: {
-        urls,
-        pagination: {
-          totalLinks,
-          currentPage: parseInt(page),
-          totalPages: Math.ceil(totalLinks / limit),
-        },
-      },
-    });
+              if (!dateWiseClicks[date]) {
+                  dateWiseClicks[date] = 0;
+              }
+              dateWiseClicks[date] += 1;
+            console.log(entry);
+              const userAgent = entry.device;
+              if (userAgent.includes("phone")) {
+                  deviceTypeClicks.mobile += 1;
+              } else if (userAgent.includes("tablet")) {
+                  deviceTypeClicks.tablet += 1;
+              } else {
+                  deviceTypeClicks.desktop += 1;
+              }
+          });
+      });
+
+      res.status(200).json({
+          totalClicks,
+          dateWiseClicks,
+          deviceTypeClicks,
+      });
+  } catch (error) {
+      console.error("Error fetching analytics:", error.message);
+      res.status(500).json({ 
+          status: 'error',
+          message: "Internal server error."
+      });
+  }
+};
+const getSearchUrl = async (req, res) => {
+  let { search } = req.query;
+  const userId = req.user.id;
+
+
+  try {
+
+
+    if (typeof search !== 'string') {
+      search = ''; // Set it to an empty string to prevent errors
+  }
+      const urls = await ShortUrlModel.find({
+          userId,
+          remarks: { $regex:search.trim(), $options: 'i' } // Case-insensitive search
+      });
+
+      if (!urls.length) {
+          return res.status(404).json({
+              status: 'error',
+              message: "No URLs found matching the search query.",
+          });
+      }
+
+      return res.status(200).json({
+          status: 'success',
+          message: "URLs fetched successfully.",
+          data: urls,
+      });
   } catch (err) {
-    console.error("Error fetching links:", err);
-    return res.status(500).json({
-      error:
-        "An error occurred while fetching the links. Please try again later.",
-    });
+      console.error("Error fetching search results:", err);
+      return res.status(500).json({
+          status: 'error',
+          message: "An error occurred while fetching the search results. Please try again later.",
+      });
   }
 }
+// router.get("/", authMiddleware, async (req, res) => {
+//   const { query } = req.query;
 
+//   try {
+//     if (!query || query.trim() === "") {
+//       console.log("Query is missing or empty");
+//       return res.status(400).json({ message: "Search query is required" });
+//     }
 
-module.exports = { createShortenedLink, getUserLinks, redirectLink ,editUrl,deleteUrl,searchUrl};
+//     const filter = {
+//       user: req.user.id,
+//       remarks: { $regex: query, $options: "i" }, // Perform regex search
+//     };
+
+//     const results = await ShortUrlModel.find(filter);
+//     if (results.length === 0) {
+//       return res.status(404).json({ message: "No matching links found" });
+//     }
+//     res.status(200).json({
+//       message: "Search results fetched successfully",
+//       data: results,
+//     });
+//   } catch (error) {
+//     console.error("Error in /search route:", error.message);
+//     res
+//       .status(500)
+//       .json({ message: "Internal server error", error: error.message });
+//   }
+// });
+
+module.exports = { createShortenedLink, getUserLinks, redirectLink ,editUrl,deleteUrl,getSearchUrl,dashboard};

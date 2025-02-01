@@ -1,17 +1,15 @@
-
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate from react-router-dom
+import { useNavigate } from 'react-router-dom';  
 import styles from './Header.module.css';
 import Drawer from '../drawer/Drawer';
 
-const Header = () => {
+const Header = ({search,setSearch}) => {
   const [greeting, setGreeting] = useState('');
   const [day, setDay] = useState('');
-  const [userName, setUserName] = useState(''); // For storing user's name
+  const [userName, setUserName] = useState(''); 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false); // Logout modal state
-  const [searchQuery, setSearchQuery] = useState(''); // State for the search bar input
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false); 
+  const navigate = useNavigate(); 
 
   const getGreeting = () => {
     const currentHour = new Date().getHours();
@@ -35,7 +33,7 @@ const Header = () => {
     setGreeting(getGreeting());
     setDay(getCurrentDate());
 
-    // Retrieve user details from local storage
+ 
     const user = JSON.parse(localStorage.getItem('user'));
     if (user?.name) {
       setUserName(user.name);
@@ -44,15 +42,15 @@ const Header = () => {
     const handleUserUpdated = () => {
       const user = JSON.parse(localStorage.getItem('user'));
       if (user?.name) {
-        setUserName(user.name); // Update user name in state
+        setUserName(user.name); 
       }
     };
 
-    // Listen for the custom event to re-render the Header
+    
     window.addEventListener('userUpdated', handleUserUpdated);
 
     return () => {
-      // Cleanup event listener
+      
       window.removeEventListener('userUpdated', handleUserUpdated);
     };
   }, []);
@@ -66,22 +64,21 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    // Clear user data and redirect to login
+   
     localStorage.removeItem('user');
-    localStorage.removeItem('token'); // Remove the token
+    localStorage.removeItem('token'); 
     window.location.href = '/login';
   };
-
-  // Handle search input and navigate to links page when user types something
-  const handleSearchChange = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-
-    if (query.trim()) {
-      navigate('/links');  // Navigate to the Links page when the user types in the search bar
+  const handleSearchChange = async (e) => {
+    if (location.pathname !== "/links") {
+      navigate("/links");
     }
+    
+    const query = e.target.value;
+    setSearch(query);
+  
   };
-
+  
   return (
     <div className={styles.header}>
       <div className={styles.greeting}>
@@ -94,8 +91,8 @@ const Header = () => {
           <input
             type="text"
             placeholder="Search by remarks"
-            value={searchQuery}  // Bind input value to state
-            onChange={handleSearchChange}  // Update the state and navigate when typing
+            value={search}  
+            onChange={handleSearchChange}  
           />
           <img src="/Frame.png" alt="Search Icon" />
         </div>

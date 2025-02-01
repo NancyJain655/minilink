@@ -1,76 +1,8 @@
 
-/*.dashboard {
-  display: flex;
-  height: 100vh;
-}
-
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.pages {
-  padding: 20px;
-  flex: 1;
-  overflow-y: auto;
-}
-
-.pageContent {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.totalClicks {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin: 10px 0;
-}
-
-.charts {
-  margin-top: 50px;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  width: 100%;
-  height:460px;
-}
-
-.chart {
-  flex: 1;
-  background: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0px 1px 2px 0px #1018280D;
-
-}
-
-.chart h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #444;
-}
-.totalClicksWrapper {
-  display: flex;
-  align-items: center; /* Align title and value 
-  gap: 10px; /* Space between title and value 
-}
-
-.totalClicks {
-  font-size: 1.5rem;
-  color: #4a90e2; 
-  font-weight: bold;
-}
-
-.chart {
-  margin-bottom: 20px; 
-}*/
 .dashboard {
   display: flex;
   height: 100vh;
+  background-color: white;
 }
 
 .main {
@@ -103,11 +35,11 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  width: 100%;
-  height:460px;
-  max-height: 460px; /* Set maximum height for the charts container */
-  overflow-y: auto; /* Enable vertical scrolling for the charts */
-  padding-right: 10px; /* Prevent content from getting cut off */
+  width: 90%;
+  height:420px;
+  max-height: 460px; 
+ overflow-y:auto;
+  padding-right: 10px;
 }
 
 .chart {
@@ -115,7 +47,9 @@
   background: #fff;
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0px 1px 2px 0px #1018280D;
+  box-shadow: 0px 4px 7px 0px #1018280D;
+  border: 1px solid #ECECF2;
+  height:400px;
 }
 
 .chart h3 {
@@ -127,22 +61,22 @@
 
 .totalClicksWrapper {
   display: flex;
-  align-items: center; /* Align title and value */
-  gap: 10px; /* Space between title and value */
+  align-items: center; 
+  gap: 10px; 
 }
 
 .totalClicks {
   font-size: 1.5rem;
-  color: #1B48DA; /* Accent color for the value */
+  color: #1B48DA; 
   font-weight: bold;
 }
 
 .chart {
-  margin-bottom: 20px; /* Space between the two charts */
+  margin-bottom: 20px; 
 }
 .charts {
-  position: relative; /* Make it context-aware */
-  z-index: 1; /* Keep it below the drawer */
+  position: relative; 
+  z-index: 1; 
 }
 .overlay {
   position: fixed;
@@ -150,8 +84,39 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
-  z-index: 999; /* Place just below the drawer */
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 999; 
 }
+.dashboard {
+  display: flex;
+  height: 100vh;
+  background-color: white;
+}
+
+@media (max-width:700px) {
+
+  .charts {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  width: 90%;
+  height:420px;
+  max-height: 460px; 
+ overflow-y:auto;
+  padding-right: 10px;
+  margin: 50px;
+}
+}
+@media (max-width:800px) {
+  .charts{
+    margin-bottom: 50px;
+  }
+}
+
+
+
+
 
 

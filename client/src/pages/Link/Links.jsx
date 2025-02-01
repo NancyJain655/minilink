@@ -1,34 +1,35 @@
 
 import React, { useState, useEffect } from "react";
-import { getUrls } from "../../apis/link"; // Import the API function
+import { getUrls ,searchUrl} from "../../apis/link"; 
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 import Drawer from "../../components/drawer/Edit";
 import Modal from "../../components/modals/Modals";
-import { deleteUrlById } from "../../apis/link"; // Import the delete API function
+import { deleteUrlById } from "../../apis/link"; 
 import styles from "./Links.module.css";
 
 const Links = () => {
-  const [data, setData] = useState([]); // State for table data
+  const [data, setData] = useState([]); 
   const [pagination, setPagination] = useState({ currentPage: 1, totalPages: 1 });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [sortOrder, setSortOrder] = useState("asc"); // State for sorting order
-  const [statusSortOrder, setStatusSortOrder] = useState("asc"); // State for status sorting order
-
-  // Helper function for formatting date
+  const [sortOrder, setSortOrder] = useState("asc"); 
+  const [statusSortOrder, setStatusSortOrder] = useState("asc"); 
+  const [search, setSearch]= useState("");
+  console.log(search);
+  console.log(data);
   const formatDateInIST = (isoDateString) => {
-    const date = new Date(isoDateString); // Parse the ISO date string
+    const date = new Date(isoDateString); 
     const options = {
-      timeZone: "Asia/Kolkata", // Indian Standard Time
+      timeZone: "Asia/Kolkata", 
       year: "numeric",
-      month: "short", // e.g., Jan
+      month: "short", 
       day: "numeric",
       hour: "numeric",
       minute: "numeric",
-      hour12: false, // 24-hour format
+      hour12: false, 
     };
 
     return new Intl.DateTimeFormat("en-US", options).format(date);
@@ -45,15 +46,19 @@ const Links = () => {
 
   // Fetch links on component mount
   useEffect(() => {
-    fetchLinks();
-  }, []);
+    if (search.length > 0) {
+      getSearchLinks(search);
+    } else {
+      fetchLinks();
+    }
+  }, [search]);
 
   const fetchLinks = async (page = 1) => {
     try {
       const response = await getUrls(page);
       const { urls, pagination: paginationData } = response.data;
 
-      setData(urls); // Set the initial data
+      setData(urls); 
       setPagination({
         currentPage: paginationData.currentPage,
         totalPages: paginationData.totalPages,
@@ -62,6 +67,25 @@ const Links = () => {
       console.error("Error fetching links:", error);
     }
   };
+    
+
+  const getSearchLinks = async ( search ) => {
+    try {
+      const response = await searchUrl( search); 
+      const { urls, pagination: paginationData } = response.data;
+
+      setData(urls);
+      setPagination({
+        currentPage: paginationData.currentPage,
+        totalPages: paginationData.totalPages,
+      });
+    } catch (error) {
+      console.error("Error fetching links:", error);
+    }
+  };
+
+
+
 
   const handleSortByDate = () => {
     const sortedData = [...data].sort((a, b) => {
@@ -72,7 +96,7 @@ const Links = () => {
     });
 
     setData(sortedData); // Update the data state with sorted data
-    setSortOrder(sortOrder === "asc" ? "desc" : "asc"); // Toggle the sort order
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc"); 
   };
 
   const handleSortByStatus = () => {
@@ -92,8 +116,8 @@ const Links = () => {
   };
 
   const handleDeleteClick = (row) => {
-    setSelectedRow(row); // Store the row to be deleted
-    setIsModalOpen(true); // Open the modal
+    setSelectedRow(row); 
+    setIsModalOpen(true); 
   };
   const handleModalClose = () => {
     setIsModalOpen(false);
@@ -102,10 +126,8 @@ const Links = () => {
 
   const handleConfirmDelete = async (id) => {
     try {
-      // Call API to delete the URL
+     
       await deleteUrlById(id);
-  
-      // Remove the deleted row from the table
       setData((prevData) => prevData.filter((row) => row._id !== id));
   
       console.log("Deleted successfully:", id);
@@ -113,8 +135,8 @@ const Links = () => {
       console.error("Error deleting link:", error);
       alert("Failed to delete the link. Please try again.");
     } finally {
-      setIsModalOpen(false); // Close the modal
-      setSelectedRow(null);  // Reset the selected row
+      setIsModalOpen(false); 
+      setSelectedRow(null); 
     }
   };
 
@@ -129,16 +151,18 @@ const Links = () => {
   };
 
   const handleEditClick = (row) => {
-    setSelectedRow(row); // Save the selected row data
-    setIsDrawerOpen(true); // Open the drawer
+    setSelectedRow(row); 
+    setIsDrawerOpen(true); 
   };
+ 
 
   return (
     <div className={styles.link}>
       <Sidebar />
       <div className={styles.main}>
-        <Header />
+        <Header search={search} setSearch={setSearch}/>
         <div className={styles.pages}>
+        <div className={styles.tableWrapper}>
           <table className={styles.table}>
             <thead>
               <tr>
@@ -148,7 +172,7 @@ const Links = () => {
                     src="/sorticon.png"
                     alt="sorting"
                     className={styles.dateSortIcon}
-                    onClick={handleSortByDate} // Add click handler for sorting
+                    onClick={handleSortByDate} 
                     style={{ cursor: "pointer" }}
                   />
                 </th>
@@ -162,7 +186,7 @@ const Links = () => {
                     src="/sorticon.png"
                     alt="sorting"
                     className={styles.sortIcon}
-                    onClick={handleSortByStatus} // Add click handler for sorting status
+                    onClick={handleSortByStatus} 
                     style={{ cursor: "pointer" }}
                   />
                 </th>
@@ -173,7 +197,8 @@ const Links = () => {
               {data.map((row, index) => (
                 <tr key={index}>
                   <td>{formatDateInIST(row.createdAt)}</td>
-                  <td>{row.original_url}</td>
+                  <td>{row.original_url.length > 30 ? row.original_url.slice(0,30)  : row.original_url}</td>
+
                   <td>
                   {`https://minilink-e3fc.onrender.com/api/link/${row.shortened_url}`.slice(0,9)}
                     <img
@@ -212,25 +237,38 @@ const Links = () => {
               ))}
             </tbody>
           </table>
-
-          {/* Pagination */}
-          <div className={styles.pagination}>
-            <button
-              onClick={() => fetchLinks(pagination.currentPage - 1)}
-              disabled={pagination.currentPage === 1}
-            >
-              Previous
-            </button>
-            <span>
-              Page {pagination.currentPage} of {pagination.totalPages}
-            </span>
-            <button
-              onClick={() => fetchLinks(pagination.currentPage + 1)}
-              disabled={pagination.currentPage === pagination.totalPages}
-            >
-              Next
-            </button>
           </div>
+          <div className={styles.pagination}>
+  {/* Previous Arrow */}
+  <button
+    className={`${styles.arrowButton} ${pagination.currentPage === 1 ? styles.disabled : ''}`}
+    onClick={() => fetchLinks(pagination.currentPage - 1)}
+    disabled={pagination.currentPage === 1}
+  >
+    ←
+  </button>
+
+  {/* Page Number Bullets */}
+  {[...Array(pagination.totalPages)].map((_, index) => (
+    <span
+      key={index}
+      className={`${styles.pageNumber} ${pagination.currentPage === index + 1 ? styles.active : ''}`}
+      onClick={() => fetchLinks(index + 1)}
+    >
+      {index + 1}
+    </span>
+  ))}
+
+  {/* Next Arrow */}
+  <button
+    className={`${styles.arrowButton} ${pagination.currentPage === pagination.totalPages ? styles.disabled : ''}`}
+    onClick={() => fetchLinks(pagination.currentPage + 1)}
+    disabled={pagination.currentPage === pagination.totalPages}
+  >
+    →
+  </button>
+</div>
+
 
           {/* Copy Notification */}
           {isCopied && (

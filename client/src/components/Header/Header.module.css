@@ -1,57 +1,4 @@
-/*.header {
-    width: 100%;
-    padding: 1rem;
-    border-bottom: 1px solid #E5E5E5;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-}
-.greeting {
-    font-size: 1rem;
-}
-.greeting p{
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: #878BA9;
-    margin-left: 25px;
-}
 
-.headerFunc {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-}
-.headerFunc button {
-    background-color: var(--primary-color);
-    width:130px;
-    height: 30px;
-    padding: 0.5px 1px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    background-color: #334b9c
-}
-
-.headerFunc input{
-    padding: 2px 2px;
-    height: 30px;
-    width:200px;
-    border-radius: 5px;
-    border: 1px solid #E5E5E5;
-}
-.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    background-color: antiquewhite;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}*/
 .header {
     width: 100%;
     padding: 1rem;
@@ -125,7 +72,7 @@
 }
 .logoutModal {
     position: absolute;
-    top: 10%;
+    top: 8%;
     right: 0;
     width: 85px;
     height: 30px;
@@ -147,5 +94,47 @@
     color: #333;
   }
   
+  @media(max-width:700px){
+    .header {
+        width: 100%;
+        padding: 1rem;
+        border-bottom: 1px solid #E5E5E5;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+    }
+    .headerfunc{
+        gap:1rem;
+    }
+    .headerFunc button{
+        width:100px;
+    }
+    .greeting{
+        display: flex;
+
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .greeting p {
+        font-size: 0.7rem;
+        font-weight: 300;
+        color: #878BA9;
+        margin-left: 7px;
+        padding-top: 2px;
+    }
+    .headerFunc input {
+        padding-left: 30px; /* Adds space for the icon inside the input */
+        height: 30px;
+        width: 150px;
+        border-radius: 5px;
+        border: 1px solid #E5E5E5;
+    }
+    .logoutModal {
+        top:10%;
+    }
+  }
 
 
